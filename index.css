@@ -33,6 +33,7 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -47,6 +48,7 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -61,6 +63,7 @@ body {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -75,6 +78,7 @@ body {
   from {
     transform: translateY(-100%);
   }
+
   to {
     transform: translateY(0);
   }
@@ -88,6 +92,7 @@ body {
   from {
     transform: translateY(100%);
   }
+
   to {
     transform: translateY(0);
   }
@@ -102,6 +107,7 @@ body {
     transform: translateX(40px);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -117,6 +123,7 @@ body {
     transform: translateY(-16px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -127,12 +134,22 @@ body {
   animation: slide-in-from-top-4 0.3s ease-out;
 }
 
-/* Responsive breakpoints */
-@media (min-width: 480px) {
-  .xs\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .xs\:block {
-    display: block;
-  }
+/* Responsive breakpoints are handled by Tailwind config */
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(12, 12, 14, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom transitions */
+.transition-sidebar {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Better typography for headers */
+.tracking-tactical {
+  letter-spacing: 0.25em;
 }

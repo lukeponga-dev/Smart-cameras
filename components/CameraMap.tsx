@@ -336,9 +336,9 @@ const CameraMap: React.FC<CameraMapProps> = ({
       <div ref={mapContainerRef} className="w-full h-full z-10" />
 
       {/* Layer Control HUD (Right Sidebar) */}
-      <div className="absolute top-24 right-6 z-[400] flex flex-col gap-3">
-        <div className="bg-[#0c0a09]/80 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 flex flex-col gap-2 shadow-2xl">
-          <h4 className="text-[8px] font-black text-zinc-600 uppercase tracking-widest text-center py-1">Layer HUD</h4>
+      <div className="absolute top-20 sm:top-24 right-3 sm:right-6 z-[400] flex flex-col gap-3">
+        <div className="glass rounded-2xl p-1.5 sm:p-2 flex flex-col gap-2 shadow-2xl">
+          <h4 className="text-[7px] sm:text-[8px] font-black text-zinc-600 uppercase tracking-widest text-center py-1">HUD</h4>
           {[
             { id: 'weather', icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z' },
             { id: 'transport', icon: 'M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z M9 9h6 M11 15h2' },
@@ -347,18 +347,18 @@ const CameraMap: React.FC<CameraMapProps> = ({
             <button
               key={layer.id}
               onClick={() => toggleLayer(layer.id)}
-              className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all active:scale-90 relative ${activeLayers.has(layer.id) ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-zinc-900/50 text-zinc-500 hover:text-zinc-300'
+              className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all active:scale-90 relative ${activeLayers.has(layer.id) ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-zinc-900/50 text-zinc-500 hover:text-zinc-300'
                 }`}
             >
               {isLayerLoading === layer.id ? (
                 <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
               ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={layer.icon} />
                 </svg>
               )}
               {activeLayers.has(layer.id) && (
-                <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-blue-400 rounded-full border-2 border-[#09090b] animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-2 sm:w-2.5 h-2 sm:h-2.5 bg-blue-400 rounded-full border-2 border-[#09090b] animate-pulse"></div>
               )}
             </button>
           ))}
@@ -366,16 +366,16 @@ const CameraMap: React.FC<CameraMapProps> = ({
       </div>
 
       {/* Map Control HUD (Left Sidebar) */}
-      <div className="absolute top-24 left-6 z-[400] flex flex-col gap-4 w-full max-w-sm">
+      <div className="absolute top-20 sm:top-24 left-3 sm:left-6 z-[400] flex flex-col gap-3 w-[calc(100%-100px)] sm:max-w-sm">
         <form onSubmit={handleAddressSearch} className="relative group">
           <input
             type="text"
-            placeholder="Search address or landmark..."
+            placeholder="Search Intel..."
             value={addressQuery}
             onChange={(e) => setAddressQuery(e.target.value)}
-            className="w-full bg-[#0c0a09]/95 backdrop-blur-xl border border-white/10 rounded-2xl px-5 py-3.5 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-blue-500/50 shadow-2xl"
+            className="w-full glass rounded-2xl px-4 sm:px-5 py-3 sm:py-3.5 text-[10px] sm:text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-blue-500/50 shadow-2xl"
           />
-          <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-zinc-500 hover:text-blue-500 transition-colors">
+          <button type="submit" className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 p-2 text-zinc-500 hover:text-blue-500 transition-colors">
             {isSearching ? (
               <div className="w-4 h-4 border-2 border-zinc-700 border-t-blue-500 rounded-full animate-spin"></div>
             ) : (
@@ -386,26 +386,26 @@ const CameraMap: React.FC<CameraMapProps> = ({
 
         <button
           onClick={locateUser}
-          className="w-fit bg-[#0c0a09]/95 backdrop-blur-xl border border-white/10 rounded-2xl px-5 py-3 flex items-center gap-3 shadow-2xl hover:border-blue-500/50 transition-all active:scale-95"
+          className="w-fit glass rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 flex items-center gap-3 shadow-2xl hover:border-blue-500/50 transition-all active:scale-95"
         >
-          <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-          <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">Fix Position</span>
+          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          <span className="text-[9px] sm:text-[10px] font-black text-zinc-400 uppercase tracking-widest">Fix Position</span>
         </button>
       </div>
 
       {/* Origin/Destination Selection HUD */}
       {routeOrigin && !routeDestination && (
-        <div className="absolute top-24 left-1/2 -translate-x-1/2 z-[450] animate-in fade-in slide-in-from-top-4 duration-500">
-          <div className="bg-blue-600/90 backdrop-blur-xl px-6 py-2.5 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-blue-400/30 flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
-            <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Select Destination Camera</span>
+        <div className="absolute top-20 sm:top-24 left-1/2 -translate-x-1/2 z-[450] animate-in fade-in slide-in-from-top-4 duration-500 w-max">
+          <div className="bg-blue-600/90 backdrop-blur-xl px-4 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-blue-400/30 flex items-center gap-2 sm:gap-3">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white animate-pulse"></div>
+            <span className="text-[8px] sm:text-[10px] font-black text-white uppercase tracking-[0.15em] sm:tracking-[0.2em]">Select Destination Camera</span>
           </div>
         </div>
       )}
 
       {routeStats && (
-        <div className="absolute top-24 right-24 z-[400] animate-in slide-in-from-right-10 pointer-events-none">
-          <div className="bg-[#0c0a09]/95 backdrop-blur-3xl border border-blue-500/30 p-5 rounded-3xl shadow-2xl flex flex-col gap-5 pointer-events-auto min-w-[240px]">
+        <div className="absolute top-36 sm:top-24 right-3 sm:right-24 z-[400] animate-in slide-in-from-right-10 pointer-events-none w-[calc(100%-24px)] sm:w-auto">
+          <div className="glass p-4 sm:p-5 rounded-[2rem] sm:rounded-3xl shadow-2xl flex flex-col gap-4 sm:gap-5 pointer-events-auto sm:min-w-[240px]">
             <div className="flex justify-between items-center">
               <h4 className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Vector Params</h4>
               <div className="flex gap-2">
